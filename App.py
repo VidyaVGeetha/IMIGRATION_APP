@@ -100,25 +100,23 @@ elif route == "Illegal migrant / long overstay":
     years = 30
 
 # ---------------------
-# INTEGRATION / ENGLISH EXAMPLE
+# ENGLISH LEVEL (C1) ADJUSTMENT
 # ---------------------
 st.markdown("---")
-st.markdown("### Integration / English Example (VERY simplified)")
+st.markdown("### English Level Adjustment (C1 example)")
 
-has_integration = st.checkbox(
-    "I meet strong integration standards (e.g. high English level, stable work, regular volunteering)"
+has_c1 = st.checkbox(
+    "My English level is C1 or higher"
 )
 
 st.caption(
-    "The consultation mentions possible reductions for contribution and integration "
-    "(English, work history, volunteering, tax). There is NO official formula yet. "
-    "This checkbox only shows a simple example for learning."
+    "For this practice tool, anyone with C1 English gets a 1-year reduction to their qualifying period. "
+    "This is NOT an official Home Office rule – just a simple example for learning."
 )
 
-if years is not None and has_integration and years > 5:
-    # Example rule for demonstration:
-    # reduce by 1 years, but never below 5 years
-    years_adjusted = max(5, years - 1)
+if years is not None and has_c1:
+    # Reduce by 1 year, but never below 1 year (safety minimum for the demo)
+    years_adjusted = max(1, years - 1)
 else:
     years_adjusted = years
 
@@ -131,9 +129,9 @@ if st.button("Calculate (Practice Only)"):
     else:
         st.success(f"Estimated ILR qualifying period (practice only): **{years_adjusted} years**")
 
-        if has_integration and years is not None and years > 5:
+        if has_c1 and years is not None:
             st.caption(
-                "Integration box ticked → example reduction of 1 years (minimum 5 years). "
+                "C1 English selected → example reduction of 1 year from the baseline. "
                 "Real Home Office rules, if implemented, may be very different."
             )
 
