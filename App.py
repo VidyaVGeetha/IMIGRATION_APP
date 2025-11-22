@@ -91,10 +91,26 @@ elif route == "General skilled / economic migrant":
 
 elif route == "Relying on benefits / some protection routes (practice example)":
     st.info(
-        "Practice example based on the proposals: migrants reliant on benefits or in some "
-        "protection routes may face a 20-year wait."
+        "Practice rule for this tool:\n"
+        "- Baseline: 10 years.\n"
+        "- If you have relied on benefits for less than 1 year in total → +5 years (15 years total).\n"
+        "- If you have relied on benefits for 1 year or more in total → +10 years (20 years total)."
     )
-    years = 20
+
+    base_years = 10
+
+    benefits_duration = st.selectbox(
+        "How long have you relied on benefits (in total)?",
+        [
+            "Less than 1 year in total",
+            "1 year or more in total"
+        ]
+    )
+
+    if benefits_duration == "Less than 1 year in total":
+        years = base_years + 5   # 15 years
+    else:
+        years = base_years + 10  # 20 years
 
 elif route == "Illegal migrant / long overstay":
     years = 30
