@@ -20,6 +20,9 @@ st.caption(
     "Based on the November 2025 Command Paper *A Fairer Pathway to Settlement* (CP 1448), "
     "the House of Commons Library briefing CBP-10267, and the GOV.UK press release on the "
     "new legal migration model. This is a LEARNING TOOL only and NOT official immigration advice."
+    "by vidya vg data analyst aspirant scotland uk link https://github.com/VidyaVGeetha/IMIGRATION_APP/edit/main/App.py "
+    "vidyavgk@gmail.com"
+    
 )
 
 # ---------------------
