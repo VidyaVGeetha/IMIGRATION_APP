@@ -50,31 +50,24 @@ if route == "High earner on a Skilled Worker / similar route":
     st.info(
         "Practice rules:\n"
         "- Baseline: 10 years.\n"
-        "- If salary ≥ £50,270 → 5 years (higher-skilled earner example).\n"
-        "- If salary ≥ £125,140 AND you’ve earned this for 3 continuous years → 3 years "
-        "(treated like an ultra high-earner / Global Talent-style route)."
+        "- If salary ≥ £50,270 → 5 years.\n"
+        "- If salary ≥ £125,140 AND earned for 3 continuous years → 3 years (fast-track)."
     )
 
-    # Start with baseline
-    years = 10
+    years = 10  # baseline
 
-    # Mid–high earners: 5 years
     if salary >= 50270:
         years = 5
 
-    # Ultra high earner: £125,140+ for at least 3 continuous years → 3 years
     if salary >= 125140:
         three_years = st.checkbox(
             "I have earned £125,140 or more for at least 3 continuous years"
         )
         if three_years:
-            years = 3  # 7-year reduction from 10 → 3
+            years = 3
 
 elif route == "Global Talent / Innovator Founder / fast-track route":
-    st.info(
-        "Fast-track route for the 'brightest and best' (e.g. Global Talent, Innovator Founder "
-        "and some very high earners). For practice, we assume a 3-year qualifying period."
-    )
+    st.info("Fast-track route assumed at 3 years for Global Talent / Innovator Founder.")
     years = 3
 
 elif route == "Frontline public service (NHS doctor, nurse, teacher etc.)":
@@ -91,10 +84,10 @@ elif route == "General skilled / economic migrant":
 
 elif route == "Relying on benefits / some protection routes (practice example)":
     st.info(
-        "Practice rule for this tool:\n"
-        "- Baseline: 10 years.\n"
-        "- If you have relied on benefits for less than 1 year in total → +5 years (15 years total).\n"
-        "- If you have relied on benefits for 1 year or more in total → +10 years (20 years total)."
+        "Rule:\n"
+        "- Baseline 10 years.\n"
+        "- Benefits < 1 year → +5 years = 15 years.\n"
+        "- Benefits ≥ 1 year → +10 years = 20 years."
     )
 
     base_years = 10
@@ -108,30 +101,27 @@ elif route == "Relying on benefits / some protection routes (practice example)":
     )
 
     if benefits_duration == "Less than 1 year in total":
-        years = base_years + 5   # 15 years
+        years = base_years + 5
     else:
-        years = base_years + 10  # 20 years
+        years = base_years + 10
 
 elif route == "Illegal migrant / long overstay":
     years = 30
 
 # ---------------------
-# ENGLISH LEVEL (C1) ADJUSTMENT
+# ENGLISH LEVEL ADJUSTMENT
 # ---------------------
 st.markdown("---")
 st.markdown("### English Level Adjustment (C1 example)")
 
-has_c1 = st.checkbox(
-    "My English level is C1 or higher"
-)
+has_c1 = st.checkbox("My English level is C1 or higher")
 
 st.caption(
-    "For this practice tool, anyone with C1 English gets a 1-year reduction to their qualifying period. "
-    "This is NOT an official Home Office rule – just a simple example for learning."
+    "For this practice tool, C1 English reduces your qualifying period by 1 year. "
+    "This is not an official Home Office rule."
 )
 
 if years is not None and has_c1:
-    # Reduce by 1 year, but never below 1 year (safety minimum for the demo)
     years_adjusted = max(1, years - 1)
 else:
     years_adjusted = years
@@ -145,17 +135,37 @@ if st.button("Calculate (Practice Only)"):
     else:
         st.success(f"Estimated ILR qualifying period (practice only): **{years_adjusted} years**")
 
-        if has_c1 and years is not None:
+        if has_c1:
             st.caption(
-                "C1 English selected → example reduction of 1 year from the baseline. "
-                "Real Home Office rules, if implemented, may be very different."
+                "C1 English selected → 1-year reduction applied. "
+                "Real Home Office rules may differ."
             )
 
         st.warning(
             "⚠ IMPORTANT:\n\n"
             "- This tool is for PRACTICE and CODE LEARNING only.\n"
             "- It loosely follows proposals in the 2025 immigration white paper and GOV.UK announcements.\n"
-            "- Proposals are subject to consultation and may change before any law comes into force.\n"
-            "- For real immigration decisions, always check the latest rules on GOV.UK "
-            "or speak to a qualified immigration adviser."
+            "- Proposals may change before becoming law."
         )
+
+# ---------------------
+# REFERENCES SECTION
+# ---------------------
+st.markdown("---")
+st.markdown("## 📚 References / Sources")
+
+st.markdown("""
+### 🔗 Official Links Used
+
+1. **GOV.UK – Biggest overhaul of legal migration model in 50 years**  
+   https://www.gov.uk/government/news/biggest-overhaul-of-legal-migration-model-in-50-years-announced
+
+2. **UK Parliament – House of Commons Library Briefing CBP-10267**  
+   https://commonslibrary.parliament.uk/research-briefings/cbp-10267/
+
+3. **Global Talent Visa Information**  
+   https://www.gov.uk/global-talent
+
+4. **UK Income Tax Rates (for £125,140 high-earner band)**  
+   https://www.gov.uk/income-tax-rates
+""")
