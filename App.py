@@ -50,8 +50,8 @@ if route == "High earner on a Skilled Worker / similar route":
     st.info(
         "Practice rules for Skilled Worker high earners:\n"
         "- Baseline: 10 years.\n"
-        "- If salary is at least £50,270 → 5-year route.\n"
-        "- If salary is at least £50,270 (including £125,140 and above) AND held for 3 continuous years → 3-year fast-track route."
+        "- If salary is at least £50,270 held for last 3 years → 5-year route.\n"
+        "- If salary is at least £125,140 and above for last 3 years → 3-year fast-track route."
     )
 
     # Start with baseline
