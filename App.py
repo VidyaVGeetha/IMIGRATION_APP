@@ -167,7 +167,15 @@ if st.button("Calculate (Practice Only)"):
             "- Real ILR rules may change after consultation.\n"
             "- Always check GOV.UK or consult an immigration adviser."
         )
+# ---------------------
+# Visitor Counter (Session-Level)
+# ---------------------
+if "page_hits" not in st.session_state:
+    st.session_state.page_hits = 0
 
+st.session_state.page_hits += 1
+
+st.sidebar.success(f"🔢 Page visits this session: {st.session_state.page_hits}")
 # ---------------------
 # REFERENCES SECTION
 # ---------------------
