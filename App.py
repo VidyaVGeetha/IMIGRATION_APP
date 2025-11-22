@@ -175,8 +175,12 @@ st.markdown("""
 ### 🔗 Official Links Used
 
 1. **A Fairer Pathway to Settlement – Command Paper (CP 1448, Nov 2025)**  
+https://assets.publishing.service.gov.uk/media/691edda450b16caf978153d8/Command_Paper_final_-_reviewed7.pdf
 2. **GOV.UK – Overhaul of legal migration model**  
+https://www.gov.uk/government/news/biggest-overhaul-of-legal-migration-model-in-50-years-announced
 3. **House of Commons Library Briefing CBP-10267**  
+https://commonslibrary.parliament.uk/research-briefings/cbp-10267/
 4. **Global Talent Visa guidance**  
 5. **UK Income Tax Rates (50,270 and 125,140 thresholds)**  
+https://www.gov.uk/income-tax-rates
 """)
