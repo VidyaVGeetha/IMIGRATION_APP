@@ -1,46 +1,72 @@
-ILR Qualifying Period – Practice Calculator
-Streamlit App by Vidya VG
-This project is a practice ILR qualifying period calculator based on the proposed UK immigration “earned settlement” model described in:
-Command Paper CP 1448 – A Fairer Pathway to Settlement (Nov 2025)
-House of Commons Library Briefing CBP-10267
-GOV.UK Press Release: “Biggest overhaul of legal migration model in 50 years”
-Important:
-This tool is not official Home Office guidance.
-It is created only for learning, portfolio development, and demonstrating policy-to-logic conversion in Python.
-Purpose of the App
-This Streamlit app models how ILR qualifying periods may change under the proposed earned settlement scheme.
-It demonstrates practical translation of government policy into structured decision logic.
-The calculator adjusts ILR timelines based on:
-Salary level and number of continuous years
-English language level
-Skilled Worker category
-Health & Care Worker category
-Public service occupations
-Family routes
-Benefits/public funds history
-Illegal entry or long overstays
-This project highlights Python conditional logic, user input handling, and Streamlit interface development.
-Logic Summary (Based on the Command Paper)
-Baseline qualifying period
-General economic migrants: 10 years
-Below RQF Level 6 / many Health & Care roles: 15 years
-Global Talent / Innovator Founder route: 3 years
-Illegal entry or long overstays: up to 30 years
-Salary contribution reductions (held for last 3 continuous years)
-Salary £50,270 or above → ILR in 5 years
-Salary £125,140 or above → ILR in 3 years
-Public service occupations
-NHS doctors, nurses, teachers → ILR in 5 years
-Family routes
-British citizen family routes → ILR in 5 years
-BN(O) family routes → ILR in 5 years
-Benefits/public funds penalties
-Benefits less than 12 months total → +5 years
-Benefits 12 months or more total → +10 years
-English language (C1 level)
-C1 English reduces final ILR period by 1 year
-Tech Stack
-Python
-Streamlit
-Conditional logic modelling
-Policy interpretation and implementation
+import streamlit as st
+
+# ---------------------
+# Page Setup
+# ---------------------
+st.set_page_config(
+    page_title="ILR Qualifying Period Calculator (Practice)",
+    page_icon="🧮",
+    layout="centered"
+)
+
+st.title("🧮 ILR Qualifying Period – Practice Calculator")
+
+st.caption(
+    "Based on examples from the 2025 immigration white paper, the House of Commons Library briefing CBP-10267 "
+    "and the GOV.UK press release on the new legal migration model. "
+    "This is a LEARNING TOOL only and NOT official immigration advice."
+)
+
+# ---------------------
+# ROUTE SELECTION
+# ---------------------
+route = st.radio(
+    "Select the option that best describes your situation (for practice):",
+    (
+        "High earner on a Skilled Worker / similar route",
+        "Global Talent / Innovator Founder / fast-track route",
+        "Frontline public service (NHS doctor, nurse, teacher etc.)",
+        "Immediate family of British citizen / Hong Kong BN(O)",
+        "Health & Care Worker / lower-paid worker (below RQF level 6)",
+        "General skilled / economic migrant",
+        "Relying on benefits / some protection routes (practice example)",
+        "Illegal migrant / long overstay",
+    )
+)
+
+years = None  # total qualifying period in YEARS
+
+# ---------------------
+# ROUTE-SPECIFIC LOGIC
+# ---------------------
+if route == "High earner on a Skilled Worker / similar route":
+    salary = st.number_input(
+        "Enter your annual salary in £ (before tax)",
+        min_value=0.0,
+        step=1000.0,
+        help="Example: 50,270 or 125,140"
+    )
+
+    st.info(
+        "Practice rules for Skilled Worker high earners:\n"
+        "- Baseline: 10 years.\n"
+        "- If salary is at least £50,270 held for last 3 years → 5-year route.\n"
+        "- If salary is at least £125,140 and above for last 3 years → 3-year fast-track route."
+    )
+
+    years = 10  # baseline
+
+    if salary >= 50270:
+        three_years = st.checkbox(
+            "I have earned this salary level for at least the last 3 continuous years"
+        )
+        if three_years:
+            if salary >= 125140:
+                years = 3
+            else:
+                years = 5
+
+elif route == "Global Talent / Innovator Founder / fast-track route":
+    years = 3
+
+elif route == "Frontline publ
