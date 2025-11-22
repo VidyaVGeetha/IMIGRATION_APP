@@ -117,8 +117,8 @@ st.caption(
 
 if years is not None and has_integration and years > 5:
     # Example rule for demonstration:
-    # reduce by 2 years, but never below 5 years
-    years_adjusted = max(5, years - 2)
+    # reduce by 1 years, but never below 5 years
+    years_adjusted = max(5, years - 1)
 else:
     years_adjusted = years
 
@@ -133,7 +133,7 @@ if st.button("Calculate (Practice Only)"):
 
         if has_integration and years is not None and years > 5:
             st.caption(
-                "Integration box ticked → example reduction of 2 years (minimum 5 years). "
+                "Integration box ticked → example reduction of 1 years (minimum 5 years). "
                 "Real Home Office rules, if implemented, may be very different."
             )
 
