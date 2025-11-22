@@ -48,26 +48,29 @@ if route == "High earner on a Skilled Worker / similar route":
     )
 
     st.info(
-        "Practice rules:\n"
+        "Practice rules for Skilled Worker high earners:\n"
         "- Baseline: 10 years.\n"
-        "- If salary ≥ £50,270 → 5 years.\n"
-        "- If salary ≥ £125,140 AND earned for 3 continuous years → 3 years (fast-track)."
+        "- If salary is at least £50,270 → 5-year route.\n"
+        "- If salary is at least £50,270 (including £125,140 and above) AND held for 3 continuous years → 3-year fast-track route."
     )
 
-    years = 10  # baseline
+    # Start with baseline
+    years = 10
 
     if salary >= 50270:
-        years = 5
-
-    if salary >= 125140:
         three_years = st.checkbox(
-            "I have earned £125,140 or more for at least 3 continuous years"
+            "I have earned £50,270 or more for at least 3 continuous years"
         )
         if three_years:
-            years = 3
+            years = 3      # fast-track
+        else:
+            years = 5      # higher earner but not 3 years continuously
 
 elif route == "Global Talent / Innovator Founder / fast-track route":
-    st.info("Fast-track route assumed at 3 years for Global Talent / Innovator Founder.")
+    st.info(
+        "Fast-track route for the 'brightest and best' (e.g. Global Talent, Innovator Founder). "
+        "For this practice tool, we assume a 3-year qualifying period."
+    )
     years = 3
 
 elif route == "Frontline public service (NHS doctor, nurse, teacher etc.)":
@@ -84,10 +87,10 @@ elif route == "General skilled / economic migrant":
 
 elif route == "Relying on benefits / some protection routes (practice example)":
     st.info(
-        "Rule:\n"
-        "- Baseline 10 years.\n"
-        "- Benefits < 1 year → +5 years = 15 years.\n"
-        "- Benefits ≥ 1 year → +10 years = 20 years."
+        "Practice rule for this tool:\n"
+        "- Baseline: 10 years.\n"
+        "- If you have relied on benefits for less than 1 year in total → +5 years = 15 years.\n"
+        "- If you have relied on benefits for 1 year or more in total → +10 years = 20 years."
     )
 
     base_years = 10
@@ -101,9 +104,9 @@ elif route == "Relying on benefits / some protection routes (practice example)":
     )
 
     if benefits_duration == "Less than 1 year in total":
-        years = base_years + 5
+        years = base_years + 5   # 15 years
     else:
-        years = base_years + 10
+        years = base_years + 10  # 20 years
 
 elif route == "Illegal migrant / long overstay":
     years = 30
@@ -118,10 +121,11 @@ has_c1 = st.checkbox("My English level is C1 or higher")
 
 st.caption(
     "For this practice tool, C1 English reduces your qualifying period by 1 year. "
-    "This is not an official Home Office rule."
+    "This is NOT an official Home Office rule – just a simple learning example."
 )
 
 if years is not None and has_c1:
+    # Reduce by 1 year, but never below 1 year (safety minimum for demo)
     years_adjusted = max(1, years - 1)
 else:
     years_adjusted = years
@@ -135,17 +139,19 @@ if st.button("Calculate (Practice Only)"):
     else:
         st.success(f"Estimated ILR qualifying period (practice only): **{years_adjusted} years**")
 
-        if has_c1:
+        if has_c1 and years is not None:
             st.caption(
-                "C1 English selected → 1-year reduction applied. "
-                "Real Home Office rules may differ."
+                "C1 English selected → 1-year reduction applied to the practice estimate. "
+                "Real Home Office rules, if implemented, may be different."
             )
 
         st.warning(
             "⚠ IMPORTANT:\n\n"
             "- This tool is for PRACTICE and CODE LEARNING only.\n"
             "- It loosely follows proposals in the 2025 immigration white paper and GOV.UK announcements.\n"
-            "- Proposals may change before becoming law."
+            "- Proposals are subject to consultation and may change before any law comes into force.\n"
+            "- For real immigration decisions, always check the latest rules on GOV.UK "
+            "or speak to a qualified immigration adviser."
         )
 
 # ---------------------
