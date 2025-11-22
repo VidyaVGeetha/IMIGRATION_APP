@@ -19,10 +19,10 @@ st.title("🧮 ILR Qualifying Period – Practice Calculator")
 st.caption(
     "Based on the November 2025 Command Paper *A Fairer Pathway to Settlement* (CP 1448), "
     "the House of Commons Library briefing CBP-10267, and the GOV.UK press release on the "
-    "new legal migration model. This is a LEARNING TOOL only and NOT official immigration advice."
-    "by vidya vg data analyst aspirant scotland uk link https://github.com/VidyaVGeetha/IMIGRATION_APP/edit/main/App.py "
-    "email: vidyavgk@gmail.com"
-    
+    "new legal migration model. This is a LEARNING TOOL only and NOT official immigration advice.\n\n"
+    "By Vidya V.G — Data Analyst Aspirant, Scotland, UK\n"
+    "GitHub: https://github.com/VidyaVGeetha/IMIGRATION_APP\n"
+    "Email: vidyavgk@gmail.com"
 )
 
 # ---------------------
