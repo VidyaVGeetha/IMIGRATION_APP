@@ -135,11 +135,22 @@ elif route == "Illegal migrant / long overstay":
 st.markdown("---")
 st.markdown("### English Level Adjustment (C1 example – Table 2)")
 
-has_c1 = st.checkbox("My English level is C1 or higher")
+# ✅ New rule:
+# Only apply the C1 English reduction when the qualifying period is MORE than 5 years.
+# For 3-year and 5-year fast-track routes, no extra reduction is applied.
 
-st.caption(
-    "Table 2: C1 English earns a reduction of 1 year from the qualifying period."
-)
+if years is not None and years > 5:
+    has_c1 = st.checkbox("My English level is C1 or higher")
+    st.caption(
+        "Table 2: C1 English earns a reduction of 1 year from the qualifying period. "
+        "In this practice app, this is only applied when your qualifying period is more than 5 years."
+    )
+else:
+    has_c1 = False
+    st.caption(
+        "For 3-year and 5-year fast-track routes, this practice app does **not** apply an extra "
+        "1-year C1 English reduction (you already have the shortest suggested qualifying period)."
+    )
 
 if years is not None and has_c1:
     years_adjusted = max(1, years - 1)
@@ -155,9 +166,9 @@ if st.button("Calculate (Practice Only)"):
     else:
         st.success(f"Estimated ILR qualifying period (practice only): **{years_adjusted} years**")
 
-        if has_c1 and years is not None:
+        if has_c1 and years is not None and years > 5:
             st.caption(
-                "C1 English selected → 1-year reduction applied according to Table 2."
+                "C1 English selected → 1-year reduction applied according to Table 2 (only for routes longer than 5 years)."
             )
 
         st.warning(
@@ -167,6 +178,7 @@ if st.button("Calculate (Practice Only)"):
             "- Real ILR rules may change after consultation.\n"
             "- Always check GOV.UK or consult an immigration adviser."
         )
+
 # ---------------------
 # Visitor Counter (Session-Level)
 # ---------------------
@@ -176,6 +188,7 @@ if "page_hits" not in st.session_state:
 st.session_state.page_hits += 1
 
 st.sidebar.success(f"🔢 Page visits this session: {st.session_state.page_hits}")
+
 # ---------------------
 # REFERENCES SECTION
 # ---------------------
@@ -186,12 +199,16 @@ st.markdown("""
 ### 🔗 Official Links Used
 
 1. **A Fairer Pathway to Settlement – Command Paper (CP 1448, Nov 2025)**  
-https://assets.publishing.service.gov.uk/media/691edda450b16caf978153d8/Command_Paper_final_-_reviewed7.pdf
+https://assets.publishing.service.gov.uk/media/691edda450b16caf978153d8/Command_Paper_final_-_reviewed7.pdf  
+
 2. **GOV.UK – Overhaul of legal migration model**  
-https://www.gov.uk/government/news/biggest-overhaul-of-legal-migration-model-in-50-years-announced
+https://www.gov.uk/government/news/biggest-overhaul-of-legal-migration-model-in-50-years-announced  
+
 3. **House of Commons Library Briefing CBP-10267**  
-https://commonslibrary.parliament.uk/research-briefings/cbp-10267/
+https://commonslibrary.parliament.uk/research-briefings/cbp-10267/  
+
 4. **Global Talent Visa guidance**  
+
 5. **UK Income Tax Rates (50,270 and 125,140 thresholds)**  
 https://www.gov.uk/income-tax-rates
 """)
