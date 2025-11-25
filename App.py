@@ -4,7 +4,7 @@ import streamlit as st
 # Page Setup
 # ---------------------
 st.set_page_config(
-    page_title="ILR Qualifying Period Calculator (Practice)",
+    page_title="ILR Qualifying Period Calculator 1 (Practice)",
     page_icon="🧮",
     layout="centered"
 )
