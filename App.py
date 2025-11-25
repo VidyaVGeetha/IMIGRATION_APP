@@ -14,7 +14,7 @@ st.set_page_config(
 # ---------------------
 st.image("UK-Immigration.png", use_column_width=True)
 
-st.title("🧮 ILR Qualifying Period – Practice Calculator")
+st.title("🧮 ILR Qualifying Period – Practice Calculator 1X")
 
 st.caption(
     "Based on the November 2025 Command Paper *A Fairer Pathway to Settlement* (CP 1448), "
